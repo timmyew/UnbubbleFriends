@@ -1,8 +1,6 @@
 package com.unbubblefriends.user.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -10,10 +8,11 @@ import lombok.*;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(catalog = "user", schema = "user", name = "user")
+@Table(schema = "user", name = "user")
 public class UserDbModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
     private String username;
