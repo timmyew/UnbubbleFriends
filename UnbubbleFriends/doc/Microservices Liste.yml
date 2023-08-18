@@ -1,0 +1,21 @@
+Userservice:
+    -Login Authenfication oatuh2
+    -Register
+    -Permissions / User-Roles (User, Enterprise-User, Admin)
+    
+Groupservice:
+    -All about groups
+    
+Chatservice:
+    -All about Chats
+    
+Paymentservice:
+    -A service for payment processing
+
+ApiGatewayservice:
+    -API for all application functionalitys
+    -Communicate with all microservices
+    
+ADservice:
+    -Service to show Ads
+    

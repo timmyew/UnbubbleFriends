@@ -1,0 +1,7 @@
+Databases:
+    MariaDb:
+        -Stored all Informations about the services.
+        -It is sql and can do complex queries
+        
+    Elasticsearch:
+        -NoSQL database for fast data filtering and loading.
