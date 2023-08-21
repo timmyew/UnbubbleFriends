@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface IDbGateway<DTO> {
 
-    DTO find(Long id);
-    List<DTO> findAll(List<Long> idList);
+    DTO findById(Long id);
+    List<DTO> findAllById(List<Long> idList);
     DTO save(DTO dto);
     List<DTO> saveAll(List<DTO> dtoList);
     void delete(DTO dto);

@@ -21,12 +21,12 @@ public class AbstractDbGateway<DB extends AbstractDbModel, DTO> implements IDbGa
     }
 
     @Override
-    public DTO find(Long id) {
+    public DTO findById(Long id) {
         return modelMapper.map(repository.findById(id), dtoClassType);
     }
 
     @Override
-    public List<DTO> findAll(List<Long> idList) {
+    public List<DTO> findAllById(List<Long> idList) {
         return repository.findAllById(idList).stream().map(db -> modelMapper.map(db, dtoClassType)).toList();
     }
 
