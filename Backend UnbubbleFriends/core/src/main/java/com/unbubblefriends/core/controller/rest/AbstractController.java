@@ -1,11 +1,11 @@
 package com.unbubblefriends.core.controller.rest;
 
-import com.unbubblefriends.core.models.IBaseModel;
+import com.unbubblefriends.core.models.AbstractDbModel;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-public class AbstractController<REQUEST extends IBaseModel, RESPONSE extends IBaseModel> implements IController<REQUEST, RESPONSE>{
+public class AbstractController<REQUEST extends AbstractDbModel, RESPONSE extends AbstractDbModel> implements IController<REQUEST, RESPONSE>{
 
     public AbstractController(){
 

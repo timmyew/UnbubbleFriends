@@ -2,14 +2,15 @@ package com.unbubblefriends.core.component.gateways;
 
 import java.util.List;
 
-public interface IBaseDbGateway<DTO> {
+public interface IDbGateway<DTO> {
 
     DTO find(Long id);
-    DTO findAll(List<Long> idList);
+    List<DTO> findAll(List<Long> idList);
     DTO save(DTO dto);
-    DTO saveAll(List<DTO> dto);
+    List<DTO> saveAll(List<DTO> dtoList);
     void delete(DTO dto);
     void deleteAll(List<DTO> dtoList);
     void deleteById(Long id);
-    void deleteByIdList(List<Long> id);
+    void deleteAllById(List<Long> idList);
+    boolean isExistingById(Long id);
 }

@@ -1,11 +1,11 @@
 package com.unbubblefriends.core.controller.rest;
 
-import com.unbubblefriends.core.models.IBaseModel;
+import com.unbubblefriends.core.models.AbstractDbModel;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-interface IController<REQUEST extends IBaseModel, RESPONSE extends IBaseModel> {
+interface IController<REQUEST extends AbstractDbModel, RESPONSE extends AbstractDbModel> {
 
     ResponseEntity<RESPONSE> find(Long id);
     ResponseEntity<List<RESPONSE>> findAll(List<Long> idList);

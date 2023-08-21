@@ -26,7 +26,11 @@ extra["springShellVersion"] = "3.1.3"
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.shell:spring-shell-starter")
-	compileOnly("org.projectlombok:lombok")
+    implementation("org.modelmapper:modelmapper:3.1.1")
+	implementation("org.modelmapper:modelmapper:3.1.1")
+	implementation("org.modelmapper:modelmapper:3.1.1")
+    implementation("org.modelmapper:modelmapper:3.1.1")
+    compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
