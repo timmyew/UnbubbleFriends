@@ -5,7 +5,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class AbstractEsGateway<DB, DTO> implements IDbGateway<DTO> {
