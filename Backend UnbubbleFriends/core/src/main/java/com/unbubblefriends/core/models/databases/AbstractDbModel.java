@@ -1,4 +1,4 @@
-package com.unbubblefriends.core.models;
+package com.unbubblefriends.core.models.databases;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

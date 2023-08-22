@@ -1,7 +1,10 @@
-package com.unbubblefriends.user.models;
+package com.unbubblefriends.user.models.db;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter

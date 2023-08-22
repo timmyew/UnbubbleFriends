@@ -1,6 +1,6 @@
 package com.unbubblefriends.core.controller.rest;
 
-import com.unbubblefriends.core.models.AbstractDbModel;
+import com.unbubblefriends.core.models.databases.AbstractDbModel;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

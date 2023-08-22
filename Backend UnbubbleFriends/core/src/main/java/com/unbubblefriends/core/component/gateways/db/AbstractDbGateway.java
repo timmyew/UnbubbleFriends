@@ -1,12 +1,11 @@
 package com.unbubblefriends.core.component.gateways.db;
 
 import com.unbubblefriends.core.component.gateways.IDbGateway;
-import com.unbubblefriends.core.models.AbstractDbModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-public class AbstractDbGateway<DB extends AbstractDbModel, DTO> implements IDbGateway<DTO> {
+public class AbstractDbGateway<DB, DTO> implements IDbGateway<DTO> {
 
     private final JpaRepository<DB, Long> repository;
     private final Class<DTO> dtoClassType;

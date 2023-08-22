@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.unbubblefriends"
-version = "0.0.1-SNAPSHOT"
+version = "1.0.0"
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
@@ -18,17 +18,15 @@ repositories {
 extra["springShellVersion"] = "3.1.3"
 
 dependencies {
+	implementation(project(":core"))
 	implementation("org.mariadb.jdbc:mariadb-java-client")
 	implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.shell:spring-shell-starter")
-    implementation("org.projectlombok:lombok:1.18.28")
-    implementation("org.modelmapper:modelmapper:3.1.1")
+	implementation("org.projectlombok:lombok:1.18.28")
 	implementation("org.modelmapper:modelmapper:3.1.1")
-	implementation("org.modelmapper:modelmapper:3.1.1")
-    implementation("org.modelmapper:modelmapper:3.1.1")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 dependencyManagement {
