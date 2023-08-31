@@ -12,16 +12,14 @@ public class AbstractDbService<REQUEST, RESPONSE, DTO> implements IDbService<REQ
     private final IDbGateway<DTO> dbGateway;
     private final IDbGateway<DTO> esGateway;
     private final ModelMapper modelMapper;
-    private final Class<REQUEST> requestClass;
     private final Class<RESPONSE> responseClass;
     private final Class<DTO> dtoClass;
     protected final Logger logger;
 
-    protected AbstractDbService(IDbGateway<DTO> dbGateway, IDbGateway<DTO> esGateway, ModelMapper modelMapper, Class<REQUEST> requestClass, Class<RESPONSE> responseClass, Class<DTO> dtoClass, Logger logger){
+    protected AbstractDbService(IDbGateway<DTO> dbGateway, IDbGateway<DTO> esGateway, ModelMapper modelMapper, Class<RESPONSE> responseClass, Class<DTO> dtoClass, Logger logger){
         this.dbGateway = dbGateway;
         this.esGateway = esGateway;
         this.modelMapper = modelMapper;
-        this.requestClass = requestClass;
         this.responseClass = responseClass;
         this.dtoClass = dtoClass;
         this.logger = logger;
@@ -41,41 +39,111 @@ public class AbstractDbService<REQUEST, RESPONSE, DTO> implements IDbService<REQ
 
     @Override
     public ResponseEntity<List<RESPONSE>> findAllById(List<Long> idList) {
-        return null;
+        try {
+            List<RESPONSE> responseList = esGateway.findAllById(idList).stream().map(dto -> modelMapper.map(dto, responseClass)).toList();
+
+            return !responseList.isEmpty() ? ResponseEntity.ok(responseList) : ResponseEntity.notFound().build();
+        }
+        catch(Exception exception){
+            logger.error(exception.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @Override
-    public ResponseEntity<RESPONSE> save(REQUEST request) {
-        return null;
+    public ResponseEntity<String> save(REQUEST request) {
+        try {
+            DTO dto = modelMapper.map(request, dtoClass);
+            return ((esGateway.save(dto) != null) && (dbGateway.save(dto) != null)) ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+        }
+        catch (Exception exception){
+            logger.error(exception.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @Override
-    public ResponseEntity<List<RESPONSE>> saveAll(List<REQUEST> dtoList) {
-        return null;
+    public ResponseEntity<String> saveAll(List<REQUEST> requestList) {
+        try {
+            List<DTO> dtoList = requestList.stream().map(request -> modelMapper.map(request, dtoClass)).toList();
+
+            return ((! esGateway.saveAll(dtoList).isEmpty()) &&
+                    (! dbGateway.saveAll(dtoList).isEmpty())) ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+        }
+        catch (Exception exception){
+            logger.error(exception.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @Override
-    public void delete(REQUEST dto) {
+    public ResponseEntity<String> delete(REQUEST request) {
+        try {
+            DTO dto = modelMapper.map(request, dtoClass);
 
+            esGateway.delete(dto);
+            dbGateway.delete(dto);
+
+            return ResponseEntity.ok().build();
+        }
+        catch(Exception exception){
+            logger.error(exception.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @Override
-    public void deleteAll(List<REQUEST> dtoList) {
+    public ResponseEntity<String> deleteAll(List<REQUEST> requestList) {
+        try {
+            List<DTO> dtoList = requestList.stream().map(request -> modelMapper.map(request, dtoClass)).toList();
 
+            esGateway.deleteAll(dtoList);
+            dbGateway.deleteAll(dtoList);
+
+            return ResponseEntity.ok().build();
+        }
+        catch(Exception exception){
+            logger.error(exception.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @Override
-    public void deleteById(Long id) {
+    public ResponseEntity<String> deleteById(Long id) {
+        try {
+            esGateway.deleteById(id);
+            dbGateway.deleteById(id);
 
+            return ResponseEntity.ok().build();
+        }
+        catch(Exception exception){
+            logger.error(exception.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @Override
-    public void deleteAllById(List<Long> idList) {
+    public ResponseEntity<String> deleteAllById(List<Long> idList) {
+        try {
+            esGateway.deleteAllById(idList);
+            dbGateway.deleteAllById(idList);
 
+            return ResponseEntity.ok().build();
+        }
+        catch(Exception exception){
+            logger.error(exception.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @Override
     public ResponseEntity<String> isExistingById(Long id) {
-        return null;
+        try {
+            return esGateway.isExistingById(id) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        }
+        catch(Exception exception){
+            logger.error(exception.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }

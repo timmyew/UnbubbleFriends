@@ -71,6 +71,6 @@ public class AbstractEsGateway<DB, DTO> implements IDbGateway<DTO> {
 
     @Override
     public boolean isExistingById(Long id) {
-        return false;
+        return repository.existsById(id);
     }
 }
